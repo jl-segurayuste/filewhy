@@ -1,0 +1,29 @@
+[project]
+name = "filewhy"
+version = "0.1.0"
+description = "Agregador de señales de riesgo entre formatos de fichero (identidad real vs extensión, riesgos de ZIP/JAR/APK, riesgos de PDF) en un solo informe -- sin ejecutar ni abrir nada peligroso."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.6", "pypdf>=4.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "ruff>=0.6"]
+
+[project.scripts]
+filewhy = "filewhy.cli:main"
+
+[project.entry-points."filewhy.checks"]
+file_identity = "filewhy.checks.file_identity:FileIdentityCheck"
+archive_risk = "filewhy.checks.archive_risk:ArchiveRiskCheck"
+pdf_risk = "filewhy.checks.pdf_risk:PdfRiskCheck"
+
+[tool.setuptools.packages.find]
+include = ["filewhy*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
