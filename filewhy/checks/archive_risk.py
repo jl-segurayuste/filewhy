@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import zipfile
 from pathlib import Path
 
@@ -7,6 +8,15 @@ from filewhy.plugin import Finding
 
 _EXECUTABLE_SUFFIXES = {".exe", ".dll", ".so", ".sh", ".bat", ".cmd", ".ps1"}
 _BOMB_RATIO_THRESHOLD = 100  # tamaño descomprimido / comprimido
+
+# Unidad de Windows tipo "C:\..." o "C:/..." -- absoluto aunque no empiece
+# por "/". El propio ZIP no obliga a usar "/" como separador: herramientas
+# que crean el archivo en Windows (o construido a mano, como haría un
+# atacante) pueden usar "\" -- Path(...).parts en Linux NO lo trata como
+# separador, así que ".." solo se detectaría con "/". Por eso el traversal
+# se busca sobre el nombre normalizado a "/" en vez de fiarse solo de
+# Path(name).parts.
+_WINDOWS_DRIVE = re.compile(r"^[A-Za-z]:[\\/]")
 
 
 class ArchiveRiskCheck:
@@ -38,7 +48,8 @@ class ArchiveRiskCheck:
         findings: list[Finding] = []
         name = info.filename
 
-        if name.startswith("/") or ".." in Path(name).parts:
+        normalized = name.replace("\\", "/")
+        if name.startswith("/") or _WINDOWS_DRIVE.match(name) or ".." in Path(normalized).parts:
             findings.append(
                 Finding(
                     severity="high",

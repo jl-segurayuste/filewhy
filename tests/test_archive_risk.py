@@ -29,6 +29,31 @@ def test_zip_slip_se_detecta(workdir):
     assert any(f.severity == "high" for f in findings)
 
 
+def test_zip_slip_con_backslash_se_detecta(workdir):
+    # Bug real encontrado 2026-08-09: el nombre del miembro se comprobaba con
+    # Path(name).parts, que en Linux solo separa por "/" -- un ZIP creado (o
+    # manipulado a mano) con "\" como separador, como haría un atacante para
+    # evadir un check ingenuo, pasaba desapercibido pese a ser el mismo
+    # ataque de zip-slip.
+    p = workdir / "malicioso_backslash.zip"
+    _make_zip(p, {"..\\..\\evil.exe": b"x"})
+    findings = ArchiveRiskCheck().run(p)
+    assert any("traversal" in f.title.lower() for f in findings)
+    assert any(f.severity == "high" for f in findings)
+
+
+def test_ruta_absoluta_con_unidad_windows_se_detecta(workdir):
+    # Bug real encontrado 2026-08-09: solo se comprobaba name.startswith("/"),
+    # así que una ruta absoluta de Windows tipo "C:\Windows\..." (que
+    # sobrescribiría un fichero fuera del directorio destino igual que un "/"
+    # inicial) no se detectaba como traversal.
+    p = workdir / "malicioso_unidad.zip"
+    _make_zip(p, {"C:\\Windows\\System32\\evil.dll": b"x"})
+    findings = ArchiveRiskCheck().run(p)
+    assert any("traversal" in f.title.lower() for f in findings)
+    assert any(f.severity == "high" for f in findings)
+
+
 def test_miembro_ejecutable_se_detecta(workdir):
     p = workdir / "con_exe.zip"
     _make_zip(p, {"payload.exe": b"MZ fake exe content"})
