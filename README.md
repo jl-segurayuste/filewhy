@@ -18,6 +18,12 @@ $ filewhy scan ./descargas
 Total: 2 hallazgo(s) en 2 de 15 fichero(s).
 ```
 
+## Así se ve
+
+![Salida de filewhy sobre un proyecto de ejemplo](docs/img/demo.svg)
+
+<sub>Ejecución real sobre una carpeta de descargas con un ejecutable disfrazado de PDF, un PDF con JavaScript y un ZIP con path traversal (todos los datos son ficticios).</sub>
+
 ## Por qué existe
 
 Ya existen buenas herramientas por formato (analizadores de PDF, de APK, de
@@ -54,7 +60,7 @@ filewhy list-checks
 |---|---|
 | `file_identity` | La extensión promete un tipo, pero la firma de bytes real es otra (un `.jpg` que en realidad es un ejecutable, un `.pdf` que es un documento OLE de Office con posibles macros, un RAR o 7-Zip renombrado) |
 | `archive_risk` | En ZIP/JAR/APK/DOCX/XLSX: path traversal ("zip-slip"), enlaces simbólicos, miembros ejecutables (también `.lnk`, `.scr`… y scripts `.js`/`.vbs`/`.hta` en la raíz), miembros cifrados, macros VBA y objetos OLE en documentos de Office, ratio de compresión sospechoso (posible zip bomb, también repartida en varios miembros) |
-| `pdf_risk` | JavaScript embebido, apertura automática (`/OpenAction`), acciones `/JavaScript`, `/Launch`, `/SubmitForm` e `/ImportData` en la apertura, en eventos del documento, de las páginas, de los campos y en los enlaces; ficheros embebidos, enlaces URI, si está cifrado (los que se abren sin contraseña se revisan igual). Reconoce el PDF por su firma aunque no tenga extensión |
+| `pdf_risk` | JavaScript embebido, apertura automática (`/OpenAction`), acciones `/JavaScript`, `/Launch`, `/SubmitForm` e `/ImportData` en la apertura, en eventos del documento, de las páginas, de los campos y en los enlaces; ficheros embebidos, enlaces URI, si está cifrado (los que se abren sin contraseña se revisan igual). Reconoce el PDF por su firma aunque no tenga extensión. Si el PDF está malformado (los maliciosos suelen estarlo y los lectores los reparan), lo revisa a nivel de bytes en vez de darlo por limpio |
 
 Ningún check extrae archivos a disco, ejecuta JavaScript, ni abre ficheros
 embebidos — solo lee metadatos/estructura (vía `zipfile`/`pypdf`, ambas

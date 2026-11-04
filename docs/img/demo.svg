@@ -1,0 +1,135 @@
+<svg class="rich-terminal" viewBox="0 0 1287 513.5999999999999" xmlns="http://www.w3.org/2000/svg">
+    <!-- Generated with Rich https://www.textualize.io -->
+    <style>
+    text { font-variant-ligatures: none; }
+
+    @font-face {
+        font-family: "Fira Code";
+        src: local("FiraCode-Regular"),
+                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff2/FiraCode-Regular.woff2") format("woff2"),
+                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Regular.woff") format("woff");
+        font-style: normal;
+        font-weight: 400;
+    }
+    @font-face {
+        font-family: "Fira Code";
+        src: local("FiraCode-Bold"),
+                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff2/FiraCode-Bold.woff2") format("woff2"),
+                url("https://cdnjs.cloudflare.com/ajax/libs/firacode/6.2.0/woff/FiraCode-Bold.woff") format("woff");
+        font-style: bold;
+        font-weight: 700;
+    }
+
+    .terminal-3097092846-matrix {
+        font-family: Fira Code, monospace;
+        font-size: 20px;
+        line-height: 24.4px;
+        font-variant-east-asian: full-width;
+    }
+
+    .terminal-3097092846-title {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: arial;
+    }
+
+    .terminal-3097092846-r1 { fill: #98a84b;font-weight: bold }
+.terminal-3097092846-r2 { fill: #c5c8c6 }
+.terminal-3097092846-r3 { fill: #98729f;font-weight: bold }
+.terminal-3097092846-r4 { fill: #d0b344;font-weight: bold }
+.terminal-3097092846-r5 { fill: #cc555a;font-weight: bold }
+    </style>
+
+    <defs>
+    <clipPath id="terminal-3097092846-clip-terminal">
+      <rect x="0" y="0" width="1267.8" height="462.59999999999997" />
+    </clipPath>
+    <clipPath id="terminal-3097092846-line-0">
+    <rect x="0" y="1.5" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-1">
+    <rect x="0" y="25.9" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-2">
+    <rect x="0" y="50.3" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-3">
+    <rect x="0" y="74.7" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-4">
+    <rect x="0" y="99.1" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-5">
+    <rect x="0" y="123.5" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-6">
+    <rect x="0" y="147.9" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-7">
+    <rect x="0" y="172.3" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-8">
+    <rect x="0" y="196.7" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-9">
+    <rect x="0" y="221.1" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-10">
+    <rect x="0" y="245.5" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-11">
+    <rect x="0" y="269.9" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-12">
+    <rect x="0" y="294.3" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-13">
+    <rect x="0" y="318.7" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-14">
+    <rect x="0" y="343.1" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-15">
+    <rect x="0" y="367.5" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-16">
+    <rect x="0" y="391.9" width="1268.8" height="24.65"/>
+            </clipPath>
+<clipPath id="terminal-3097092846-line-17">
+    <rect x="0" y="416.3" width="1268.8" height="24.65"/>
+            </clipPath>
+    </defs>
+
+    <rect fill="#292929" stroke="rgba(255,255,255,0.35)" stroke-width="1" x="1" y="1" width="1285" height="511.6" rx="8"/><text class="terminal-3097092846-title" fill="#c5c8c6" text-anchor="middle" x="642" y="27">filewhy</text>
+            <g transform="translate(26,22)">
+            <circle cx="0" cy="0" r="7" fill="#ff5f57"/>
+            <circle cx="22" cy="0" r="7" fill="#febc2e"/>
+            <circle cx="44" cy="0" r="7" fill="#28c840"/>
+            </g>
+        
+    <g transform="translate(9, 41)" clip-path="url(#terminal-3097092846-clip-terminal)">
+    
+    <g class="terminal-3097092846-matrix">
+    <text class="terminal-3097092846-r1" x="0" y="20" textLength="24.4" clip-path="url(#terminal-3097092846-line-0)">$&#160;</text><text class="terminal-3097092846-r1" x="24.4" y="20" textLength="170.8" clip-path="url(#terminal-3097092846-line-0)">filewhy&#160;scan&#160;.</text><text class="terminal-3097092846-r2" x="1268.8" y="20" textLength="12.2" clip-path="url(#terminal-3097092846-line-0)">
+</text><text class="terminal-3097092846-r3" x="0" y="44.4" textLength="341.6" clip-path="url(#terminal-3097092846-line-1)">──&#160;~/descargas/contrato.pdf&#160;</text><text class="terminal-3097092846-r2" x="1268.8" y="44.4" textLength="12.2" clip-path="url(#terminal-3097092846-line-1)">
+</text><text class="terminal-3097092846-r4" x="24.4" y="68.8" textLength="97.6" clip-path="url(#terminal-3097092846-line-2)">[MEDIUM]</text><text class="terminal-3097092846-r2" x="122" y="68.8" textLength="890.6" clip-path="url(#terminal-3097092846-line-2)">&#160;PDF&#160;malformado:&#160;no&#160;se&#160;pudo&#160;leer&#160;su&#160;estructura,&#160;revisado&#160;a&#160;nivel&#160;de&#160;bytes</text><text class="terminal-3097092846-r2" x="1268.8" y="68.8" textLength="12.2" clip-path="url(#terminal-3097092846-line-2)">
+</text><text class="terminal-3097092846-r2" x="0" y="93.2" textLength="1220" clip-path="url(#terminal-3097092846-line-3)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Los&#160;lectores&#160;suelen&#160;reparar&#160;estos&#160;PDF&#160;y&#160;abrirlos&#160;igual.&#160;Si&#160;el&#160;contenido&#160;va&#160;comprimido&#160;en&#160;</text><text class="terminal-3097092846-r2" x="1268.8" y="93.2" textLength="12.2" clip-path="url(#terminal-3097092846-line-3)">
+</text><text class="terminal-3097092846-r2" x="0" y="117.6" textLength="585.6" clip-path="url(#terminal-3097092846-line-4)">flujos&#160;de&#160;objetos,&#160;esta&#160;revisión&#160;puede&#160;no&#160;verlo.</text><text class="terminal-3097092846-r2" x="1268.8" y="117.6" textLength="12.2" clip-path="url(#terminal-3097092846-line-4)">
+</text><text class="terminal-3097092846-r5" x="24.4" y="142" textLength="97.6" clip-path="url(#terminal-3097092846-line-5)">[HIGH&#160;&#160;]</text><text class="terminal-3097092846-r2" x="122" y="142" textLength="329.4" clip-path="url(#terminal-3097092846-line-5)">&#160;El&#160;PDF&#160;contiene&#160;JavaScript</text><text class="terminal-3097092846-r2" x="1268.8" y="142" textLength="12.2" clip-path="url(#terminal-3097092846-line-5)">
+</text><text class="terminal-3097092846-r2" x="0" y="166.4" textLength="817.4" clip-path="url(#terminal-3097092846-line-6)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Detectado&#160;en&#160;los&#160;bytes&#160;del&#160;fichero,&#160;no&#160;en&#160;su&#160;estructura.</text><text class="terminal-3097092846-r2" x="1268.8" y="166.4" textLength="12.2" clip-path="url(#terminal-3097092846-line-6)">
+</text><text class="terminal-3097092846-r4" x="24.4" y="190.8" textLength="97.6" clip-path="url(#terminal-3097092846-line-7)">[MEDIUM]</text><text class="terminal-3097092846-r2" x="122" y="190.8" textLength="622.2" clip-path="url(#terminal-3097092846-line-7)">&#160;El&#160;PDF&#160;ejecuta&#160;una&#160;acción&#160;al&#160;abrirse&#160;(/OpenAction)</text><text class="terminal-3097092846-r2" x="1268.8" y="190.8" textLength="12.2" clip-path="url(#terminal-3097092846-line-7)">
+</text><text class="terminal-3097092846-r2" x="0" y="215.2" textLength="817.4" clip-path="url(#terminal-3097092846-line-8)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Detectado&#160;en&#160;los&#160;bytes&#160;del&#160;fichero,&#160;no&#160;en&#160;su&#160;estructura.</text><text class="terminal-3097092846-r2" x="1268.8" y="215.2" textLength="12.2" clip-path="url(#terminal-3097092846-line-8)">
+</text><text class="terminal-3097092846-r2" x="1268.8" y="239.6" textLength="12.2" clip-path="url(#terminal-3097092846-line-9)">
+</text><text class="terminal-3097092846-r2" x="0" y="264" textLength="402.6" clip-path="url(#terminal-3097092846-line-10)">──&#160;~/descargas/factura_marzo.pdf&#160;</text><text class="terminal-3097092846-r2" x="1268.8" y="264" textLength="12.2" clip-path="url(#terminal-3097092846-line-10)">
+</text><text class="terminal-3097092846-r5" x="24.4" y="288.4" textLength="97.6" clip-path="url(#terminal-3097092846-line-11)">[HIGH&#160;&#160;]</text><text class="terminal-3097092846-r2" x="122" y="288.4" textLength="732" clip-path="url(#terminal-3097092846-line-11)">&#160;Extensión&#160;&#x27;.pdf&#x27;&#160;pero&#160;el&#160;contenido&#160;real&#160;es&#160;PE/EXE&#160;(Windows)</text><text class="terminal-3097092846-r2" x="1268.8" y="288.4" textLength="12.2" clip-path="url(#terminal-3097092846-line-11)">
+</text><text class="terminal-3097092846-r2" x="0" y="312.8" textLength="1171.2" clip-path="url(#terminal-3097092846-line-12)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;El&#160;fichero&#160;no&#160;es&#160;lo&#160;que&#160;su&#160;extensión&#160;afirma&#160;--&#160;revisar&#160;antes&#160;de&#160;abrirlo&#160;o&#160;ejecutarlo.</text><text class="terminal-3097092846-r2" x="1268.8" y="312.8" textLength="12.2" clip-path="url(#terminal-3097092846-line-12)">
+</text><text class="terminal-3097092846-r2" x="1268.8" y="337.2" textLength="12.2" clip-path="url(#terminal-3097092846-line-13)">
+</text><text class="terminal-3097092846-r2" x="0" y="361.6" textLength="305" clip-path="url(#terminal-3097092846-line-14)">──&#160;~/descargas/fotos.zip&#160;</text><text class="terminal-3097092846-r2" x="1268.8" y="361.6" textLength="12.2" clip-path="url(#terminal-3097092846-line-14)">
+</text><text class="terminal-3097092846-r5" x="24.4" y="386" textLength="97.6" clip-path="url(#terminal-3097092846-line-15)">[HIGH&#160;&#160;]</text><text class="terminal-3097092846-r2" x="122" y="386" textLength="646.6" clip-path="url(#terminal-3097092846-line-15)">&#160;Path&#160;traversal&#160;en&#160;miembro&#160;del&#160;archivo:&#160;../../.bashrc</text><text class="terminal-3097092846-r2" x="1268.8" y="386" textLength="12.2" clip-path="url(#terminal-3097092846-line-15)">
+</text><text class="terminal-3097092846-r2" x="0" y="410.4" textLength="1159" clip-path="url(#terminal-3097092846-line-16)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Extraer&#160;este&#160;ZIP&#160;tal&#160;cual&#160;podría&#160;escribir&#160;fuera&#160;del&#160;directorio&#160;destino&#160;(&#x27;zip-slip&#x27;).</text><text class="terminal-3097092846-r2" x="1268.8" y="410.4" textLength="12.2" clip-path="url(#terminal-3097092846-line-16)">
+</text><text class="terminal-3097092846-r2" x="1268.8" y="434.8" textLength="12.2" clip-path="url(#terminal-3097092846-line-17)">
+</text><text class="terminal-3097092846-r2" x="0" y="459.2" textLength="512.4" clip-path="url(#terminal-3097092846-line-18)">Total:&#160;5&#160;hallazgo(s)&#160;en&#160;3&#160;de&#160;3&#160;fichero(s).</text><text class="terminal-3097092846-r2" x="1268.8" y="459.2" textLength="12.2" clip-path="url(#terminal-3097092846-line-18)">
+</text>
+    </g>
+    </g>
+</svg>

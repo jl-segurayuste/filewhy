@@ -120,3 +120,22 @@ def test_pdf_sin_extension_se_reconoce_por_la_firma(workdir):
     with open(p, "wb") as f:
         _js_writer().write(f)
     assert any(f.severity == "high" for f in PdfRiskCheck().run(p))
+
+
+def test_pdf_malformado_con_javascript_se_detecta_por_bytes(workdir):
+    # Sin xref ni startxref: pypdf no lo lee, pero un lector lo repara y lo abre.
+    p = workdir / "contrato.pdf"
+    p.write_bytes(
+        b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog /OpenAction 2 0 R >>\nendobj\n"
+        b"2 0 obj\n<< /S /J#61vaScript /JS (app.alert(1);) >>\nendobj\n%%EOF\n"
+    )
+    titles = {f.title for f in PdfRiskCheck().run(p)}
+    assert "El PDF contiene JavaScript" in titles
+    assert "El PDF ejecuta una acción al abrirse (/OpenAction)" in titles
+    assert any(t.startswith("PDF malformado") for t in titles)
+
+
+def test_ejecutable_con_extension_pdf_no_se_revisa_por_bytes(workdir):
+    p = workdir / "factura.pdf"
+    p.write_bytes(b"MZ\x90\x00" + b"\x00" * 60 + b"/JavaScript")
+    assert PdfRiskCheck().run(p) == []
