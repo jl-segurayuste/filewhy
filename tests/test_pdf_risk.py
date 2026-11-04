@@ -1,5 +1,10 @@
 from pypdf import PdfWriter
 
+try:
+    from pypdf.actions import JavaScript
+except ImportError:  # pypdf < 6
+    JavaScript = None
+
 from filewhy.checks.pdf_risk import PdfRiskCheck
 
 
@@ -28,7 +33,10 @@ def test_pdf_con_javascript_se_detecta(workdir):
     p = workdir / "con_js.pdf"
     writer = PdfWriter()
     writer.add_blank_page(width=200, height=200)
-    writer.add_js("app.alert('hola');")
+    if JavaScript is not None:  # pypdf >= 6: add_js desaparece en pypdf 7
+        writer.add_open_action(JavaScript("app.alert('hola');"))
+    else:
+        writer.add_js("app.alert('hola');")
     with open(p, "wb") as f:
         writer.write(f)
 
