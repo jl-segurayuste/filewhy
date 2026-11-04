@@ -16,7 +16,13 @@ _SIGNATURES: list[tuple[str, bytes, int]] = [
     ("GIF", b"GIF87a", 0),
     ("GIF", b"GIF89a", 0),
     ("GZIP", b"\x1f\x8b", 0),
+    ("OLE (Office antiguo: .doc/.xls/.ppt/.msi)", b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1", 0),
+    ("RAR", b"Rar!\x1a\x07", 0),
+    ("7-Zip", b"7z\xbc\xaf\x27\x1c", 0),
 ]
+
+_ZIP = {"ZIP", "ZIP (vacío)"}
+_OLE = "OLE (Office antiguo: .doc/.xls/.ppt/.msi)"
 
 # Extensión -> nombres de firma que serían normales para ella.
 _EXPECTED: dict[str, set[str]] = {
@@ -35,12 +41,26 @@ _EXPECTED: dict[str, set[str]] = {
     ".gif": {"GIF"},
     ".gz": {"GZIP"},
     ".tgz": {"GZIP"},
+    ".docm": _ZIP,
+    ".xlsm": _ZIP,
+    ".pptm": _ZIP,
+    ".odt": _ZIP,
+    ".ods": _ZIP,
+    ".odp": _ZIP,
+    ".epub": _ZIP,
+    ".doc": {_OLE},
+    ".xls": {_OLE},
+    ".ppt": {_OLE},
+    ".msi": {_OLE},
+    ".rar": {"RAR"},
+    ".7z": {"7-Zip"},
 }
 
 
 def detect_real_type(path: Path) -> str | None:
     try:
-        header = path.read_bytes()[:16]
+        with path.open("rb") as f:
+            header = f.read(16)  # read_bytes() cargaba en memoria el fichero entero (una ISO de 4 GB)
     except OSError:
         return None
     for name, magic, offset in _SIGNATURES:

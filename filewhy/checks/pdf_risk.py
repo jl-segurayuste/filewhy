@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
 from filewhy.plugin import Finding
+
+# pypdf avisa por stderr de cada PDF malformado («invalid pdf header»…) y ensuciaba el informe.
+logging.getLogger("pypdf").setLevel(logging.ERROR)
 
 # Acciones que hacen algo más que navegar. Se buscan en la apertura (/OpenAction), en las acciones
 # adicionales (/AA) del documento, de las páginas y de los campos de formulario, y en las

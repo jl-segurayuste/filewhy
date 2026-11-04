@@ -1,6 +1,6 @@
 [project]
 name = "filewhy"
-version = "0.2.0"
+version = "0.2.1"
 description = "Agregador de señales de riesgo entre formatos de fichero (identidad real vs extensión, riesgos de ZIP/JAR/APK, riesgos de PDF) en un solo informe -- sin ejecutar ni abrir nada peligroso."
 readme = "README.md"
 license = { text = "MIT" }

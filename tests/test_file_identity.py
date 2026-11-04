@@ -50,3 +50,21 @@ def test_contenido_no_reconocido_no_se_marca(workdir):
     p = workdir / "raro.pdf"
     p.write_text("esto no es realmente un pdf")
     assert FileIdentityCheck().run(p) == []
+
+
+def test_ole_rar_7z_disfrazados_se_marcan(workdir):
+    casos = {
+        "factura.pdf": b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1resto",
+        "foto.jpg": b"Rar!\x1a\x07\x00resto",
+        "doc.docx": b"7z\xbc\xaf\x27\x1cresto",
+    }
+    for name, data in casos.items():
+        p = workdir / name
+        p.write_bytes(data)
+        assert len(FileIdentityCheck().run(p)) == 1, name
+
+
+def test_ole_con_extension_de_office_antiguo_no_se_marca(workdir):
+    p = workdir / "informe.doc"
+    p.write_bytes(b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1resto")
+    assert FileIdentityCheck().run(p) == []

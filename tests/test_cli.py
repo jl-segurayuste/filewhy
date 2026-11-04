@@ -29,3 +29,12 @@ def test_list_checks(capsys):
     assert "file_identity" in out
     assert "archive_risk" in out
     assert "pdf_risk" in out
+
+
+def test_scan_ruta_inexistente_sale_2(workdir, capsys):
+    assert main(["scan", str(workdir / "no-existe")]) == 2
+    assert "no existe" in capsys.readouterr().err
+
+
+def test_scan_check_desconocido_sale_2(workdir, capsys):
+    assert main(["scan", str(workdir), "--only", "typo"]) == 2

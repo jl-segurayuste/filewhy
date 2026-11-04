@@ -16,6 +16,16 @@ def _cmd_scan(args: argparse.Namespace) -> int:
     only = set(args.only) if args.only else None
     skip = set(args.skip) if args.skip else None
 
+    # Sin esto, una ruta mal escrita o un check con errata daban «0 hallazgos» y exit 0.
+    if not path.exists():
+        print(f"error: {path} no existe", file=sys.stderr)
+        return 2
+    unknown = ((only or set()) | (skip or set())) - set(discover_checks())
+    if unknown:
+        print(f"error: check(s) desconocido(s): {', '.join(sorted(unknown))} "
+              "(ver `filewhy list-checks`)", file=sys.stderr)
+        return 2
+
     reports = analyze_path(path, only=only, skip=skip)
 
     if args.json:
