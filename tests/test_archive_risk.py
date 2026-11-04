@@ -74,3 +74,52 @@ def test_zip_pequeno_no_marca_ratio(workdir):
     _make_zip(p, {"tiny.bin": b"\x00" * 1000})
     findings = ArchiveRiskCheck().run(p)
     assert not any("ratio" in f.title.lower() for f in findings)
+
+
+def _titles(path):
+    return [f.title for f in ArchiveRiskCheck().run(path)]
+
+
+def test_script_en_la_raiz_y_accesos_directos(workdir):
+    p = workdir / "adjunto.zip"
+    with zipfile.ZipFile(p, "w") as zf:
+        zf.writestr("factura.js", "x")
+        zf.writestr("web/app.js", "x")          # dentro de una carpeta: normal
+        zf.writestr("doc.lnk", "x")
+    titles = _titles(p)
+    assert any("factura.js" in t for t in titles)
+    assert not any("web/app.js" in t for t in titles)
+    assert any("doc.lnk" in t for t in titles)
+
+
+def test_macros_vba_y_objetos_ole(workdir):
+    p = workdir / "informe.docx"
+    with zipfile.ZipFile(p, "w") as zf:
+        zf.writestr("word/vbaProject.bin", "x")
+        zf.writestr("word/embeddings/oleObject1.bin", "x")
+    titles = _titles(p)
+    assert any("macros VBA" in t for t in titles) and any("OLE" in t for t in titles)
+
+
+def test_enlace_simbolico(workdir):
+    import stat
+
+    p = workdir / "link.zip"
+    with zipfile.ZipFile(p, "w") as zf:
+        info = zipfile.ZipInfo("enlace")
+        info.external_attr = (stat.S_IFLNK | 0o777) << 16
+        zf.writestr(info, "/etc/passwd")
+    assert any("simbólico" in t for t in _titles(p))
+
+
+def test_miembro_cifrado(workdir):
+    p = workdir / "cifrado.zip"
+    with zipfile.ZipFile(p, "w") as zf:
+        zf.writestr("secreto.txt", "x")
+    raw = bytearray(p.read_bytes())
+    # zipfile no escribe ZIP cifrados: se activa el bit 0 de los flags en la cabecera local
+    # (desplazamiento 6) y en la del directorio central (desplazamiento 8)
+    raw[raw.index(b"PK\x03\x04") + 6] |= 0x1
+    raw[raw.index(b"PK\x01\x02") + 8] |= 0x1
+    p.write_bytes(bytes(raw))
+    assert any("cifrado" in t for t in _titles(p))

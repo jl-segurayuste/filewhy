@@ -62,3 +62,61 @@ def test_pdf_invalido_no_rompe(workdir):
     p.write_bytes(b"%PDF-1.4\nesto esta roto y no es un pdf valido")
     # no debe lanzar excepcion, solo devolver lo que pueda (o nada)
     PdfRiskCheck().run(p)
+
+
+def _js_writer():
+    writer = PdfWriter()
+    writer.add_blank_page(width=200, height=200)
+    if JavaScript is not None:
+        writer.add_open_action(JavaScript("app.alert(1)"))
+    else:  # pypdf < 6
+        writer.add_js("app.alert(1)")
+    return writer
+
+
+def test_launch_en_un_enlace_se_detecta(workdir):
+    from pypdf.generic import (
+        ArrayObject,
+        DictionaryObject,
+        NameObject,
+        NumberObject,
+        TextStringObject,
+    )
+
+    writer = PdfWriter()
+    page = writer.add_blank_page(width=200, height=200)
+    action = DictionaryObject({NameObject("/S"): NameObject("/Launch"), NameObject("/F"): TextStringObject("cmd.exe")})
+    annot = DictionaryObject({
+        NameObject("/Type"): NameObject("/Annot"), NameObject("/Subtype"): NameObject("/Link"),
+        NameObject("/Rect"): ArrayObject([NumberObject(0)] * 4), NameObject("/A"): action,
+    })
+    page[NameObject("/Annots")] = ArrayObject([writer._add_object(annot)])
+    p = workdir / "launch.pdf"
+    with open(p, "wb") as f:
+        writer.write(f)
+    assert any(f.severity == "high" and "/Launch" in f.title for f in PdfRiskCheck().run(p))
+
+
+def test_cifrado_sin_contrasena_de_apertura_se_revisa(workdir):
+    writer = _js_writer()
+    writer.encrypt(user_password="", owner_password="propietario")
+    p = workdir / "cifrado.pdf"
+    with open(p, "wb") as f:
+        writer.write(f)
+    assert any(f.severity == "high" for f in PdfRiskCheck().run(p))
+
+
+def test_cifrado_con_contrasena_no_se_puede_revisar(workdir):
+    writer = _js_writer()
+    writer.encrypt(user_password="usuario", owner_password="propietario")
+    p = workdir / "cerrado.pdf"
+    with open(p, "wb") as f:
+        writer.write(f)
+    assert [f.severity for f in PdfRiskCheck().run(p)] == ["info"]
+
+
+def test_pdf_sin_extension_se_reconoce_por_la_firma(workdir):
+    p = workdir / "factura"
+    with open(p, "wb") as f:
+        _js_writer().write(f)
+    assert any(f.severity == "high" for f in PdfRiskCheck().run(p))
