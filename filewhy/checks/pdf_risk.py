@@ -36,6 +36,8 @@ def _looks_like_pdf(path: Path) -> bool:
 
 
 _RAW_NAME_RE = re.compile(rb"/([A-Za-z0-9#]{2,40})")
+_RAW_HEADER_RE = re.compile(rb"(?:^|[\r\n])%PDF-\d\.\d")
+_RAW_OBJ_RE = re.compile(rb"\d+\s+\d+\s+obj\b")
 _RAW_TOKENS = {
     "JavaScript": ("high", "El PDF contiene JavaScript"),
     "JS": ("high", "El PDF contiene JavaScript"),
@@ -58,7 +60,9 @@ def _raw_scan(path: Path) -> list[Finding]:
         data = path.read_bytes()
     except OSError:
         return []
-    if b"%PDF-" not in data[:1024]:
+    # Cabecera al principio de una línea y al menos un objeto: un .py o un .pyc que solo contiene
+    # el texto «%PDF-» (el propio código de filewhy) no es un PDF.
+    if not _RAW_HEADER_RE.search(data[:1024]) or not _RAW_OBJ_RE.search(data):
         return []  # no es un PDF (otro check se encarga de la extensión engañosa)
     names = {
         re.sub(rb"#([0-9A-Fa-f]{2})", lambda m: bytes([int(m.group(1), 16)]), m.group(1)).decode("latin-1")

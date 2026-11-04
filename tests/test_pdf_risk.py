@@ -139,3 +139,10 @@ def test_ejecutable_con_extension_pdf_no_se_revisa_por_bytes(workdir):
     p = workdir / "factura.pdf"
     p.write_bytes(b"MZ\x90\x00" + b"\x00" * 60 + b"/JavaScript")
     assert PdfRiskCheck().run(p) == []
+
+
+def test_codigo_que_menciona_pdf_no_se_revisa_por_bytes(workdir):
+    # Un .py/.pyc con «%PDF-» y nombres como /JavaScript en el código no es un PDF.
+    p = workdir / "pdf_risk.cpython-312.pyc"
+    p.write_bytes(b'\x00\x00 b"%PDF-" "/JavaScript" "/Launch" "/OpenAction"')
+    assert PdfRiskCheck().run(p) == []
