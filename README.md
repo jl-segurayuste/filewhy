@@ -44,6 +44,7 @@ filewhy scan ./carpeta                  # recursivo
 filewhy scan ./carpeta --only file_identity
 filewhy scan ./carpeta --json
 filewhy scan ./carpeta --fail-on high   # código de salida 1 si hay algo "high"
+                                        # código 2 si algún check no se pudo ejecutar (análisis incompleto)
 filewhy list-checks
 ```
 

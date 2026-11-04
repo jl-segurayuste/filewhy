@@ -33,6 +33,14 @@ def _cmd_scan(args: argparse.Namespace) -> int:
     else:
         print(to_console(reports))
 
+    # Un check que revienta deja el fichero sin revisar del todo: antes era un hallazgo «medium» más
+    # y con --fail-on high el CI pasaba por verde.
+    failed = sorted({r.path for r in reports for f in r.findings if f.check_error})
+    if failed:
+        print(f"error: hubo checks que no se pudieron ejecutar en: {', '.join(failed)} "
+              "(análisis incompleto)", file=sys.stderr)
+        return 2
+
     if args.fail_on:
         worst = worst_severity(reports)
         if worst is not None and _SEVERITY_ORDER[worst] >= _SEVERITY_ORDER[args.fail_on]:

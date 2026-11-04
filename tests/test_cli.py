@@ -38,3 +38,18 @@ def test_scan_ruta_inexistente_sale_2(workdir, capsys):
 
 def test_scan_check_desconocido_sale_2(workdir, capsys):
     assert main(["scan", str(workdir), "--only", "typo"]) == 2
+
+
+def test_check_que_revienta_sale_2(workdir, monkeypatch, capsys):
+    from filewhy import runner
+
+    class Roto:
+        name = "roto"
+
+        def run(self, path):
+            raise RuntimeError("boom")
+
+    (workdir / "a.txt").write_text("x")
+    monkeypatch.setattr(runner, "discover_checks", lambda: {"roto": Roto})
+    assert main(["scan", str(workdir), "--fail-on", "high"]) == 2
+    assert "análisis incompleto" in capsys.readouterr().err

@@ -30,7 +30,10 @@ def analyze_file(
             findings.extend(checks[name]().run(path))
         except Exception as exc:  # noqa: BLE001 -- aislar un check roto del resto del escaneo
             findings.append(
-                Finding(severity="medium", title=f"Check '{name}' falló: {exc}", detail=traceback.format_exc())
+                Finding(
+                    severity="medium", title=f"Check '{name}' falló: {exc}",
+                    detail=traceback.format_exc(), check_error=True,
+                )
             )
     return FileReport(path=str(path), findings=findings)
 

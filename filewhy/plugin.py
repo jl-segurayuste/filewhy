@@ -13,6 +13,7 @@ class Finding(BaseModel):
     severity: Severity
     title: str
     detail: str = ""
+    check_error: bool = False  # el check reventó: el fichero no se ha revisado del todo
 
     def model_post_init(self, context: object, /) -> None:
         if self.severity not in SEVERITIES:
